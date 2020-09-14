@@ -1,0 +1,13 @@
+*********extendiones necesarias*********
+
+-- Microsoft.AspNet.Identity.EntityFramework -> University.BL 
+-- Microsoft.AspNet.Identity.Owin -> University.BL, University.Web
+-- Microsoft.Owin.Host.SystemWeb -> University.BL, University.Web
+-- SendGrid -> University.BL, University.Web
+-- Handlebars.Net -> University.BL, University.Web
+-- AutoMapper -> University.BL, University.Web
+-- PagedList & PagedList.MVC -> University.Web
+
+NOTA: 
+--Panel de administración IIS
+inetmgr -> En ejecutar
