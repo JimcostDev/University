@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<University.BL.DTOs.CourseDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+    <label>Courses</label>
+    @Html.DropDownList("CourseID", (SelectList)ViewData["Courses"], htmlAttributes: new { @class = "form-control" })
+    <input type="submit" value="Apply" class="btn btn-primary" />
+}
+<hr />
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+    <p>
+        <label>Select page size</label>
+        <select name="pageSize" id="pageSize" class="form-control">
+            <option @if ((int)ViewBag.PageSize == 5) { @Html.Raw("selected") } value="5"> 5</option>
+            <option @if ((int)ViewBag.PageSize == 10) { @Html.Raw("selected") } value="10"> 10</option>
+            <option @if ((int)ViewBag.PageSize == 15) { @Html.Raw("selected") } value="15"> 15</option>
+        </select>
+        <br />
+        <input type="submit" value="Apply" class="btn btn-sm btn-primary" />
+    </p>
+}
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            Title
+        </th>
+        <th>
+            Credits
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.CourseID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (ViewBag.Students != null)
+{
+    var students = (IEnumerable<University.BL.Models.Student>)ViewBag.Students;
+    <h3>Students by course</h3>
+    <hr />
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>LastName</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in students)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.FirstMidName)</td>
+                    <td>@Html.DisplayFor(m => item.LastName)</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
+<hr />
+<br />
+Page @( Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber ) of @Model.PageCount
+<br />
+Total Item Count @Model.TotalItemCount
+@Html.PagedListPager(Model, page => Url.Action("Index", "Courses", new { page, pageSize = ViewBag.PageSize }))
+
+
+
+
