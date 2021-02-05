@@ -9,31 +9,55 @@ namespace University.API.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        public class Input
         {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
         }
-
-        // POST api/values
-        public void Post([FromBody] string value)
+        [HttpGet]//get para consultas = parametros por url
+        public IHttpActionResult Get() 
         {
+            //return StatusCode(HttpStatusCode.OK);
+            return Ok();
         }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]//post para insetar = enviar datos
+        public IHttpActionResult Post(Input input) 
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok();//json
         }
-
-        // DELETE api/values/5
-        public void Delete(int id)
+        [HttpPut]//put para Modificar
+        public IHttpActionResult Put(Input input) 
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok();//json
+        }
+        [HttpDelete]//delete para eliminar
+        public IHttpActionResult Delete(int? id)
+        {
+            if (id != null)
+                return NotFound();
+
+            return Ok();
         }
     }
 }
