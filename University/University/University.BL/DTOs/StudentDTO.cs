@@ -17,6 +17,14 @@ namespace University.BL.DTOs
         public string FirstMidName { get; set; }
         [DataType(DataType.Date)]
         public DateTime EnrollmentDate { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", LastName, FirstMidName);
+            }
+        }
         public ICollection<EnrollmentDTO> Enrollment { get; set; }
     }
 }

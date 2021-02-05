@@ -5,7 +5,7 @@
 -- Microsoft.Owin.Host.SystemWeb -> University.BL, University.Web
 -- SendGrid -> University.BL, University.Web
 -- Handlebars.Net -> University.BL, University.Web
--- AutoMapper -> University.BL, University.Web
+-- AutoMapper -> University.BL, University.Web, University.API
 -- PagedList & PagedList.MVC -> University.Web
 
 NOTA: 
